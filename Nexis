@@ -1,0 +1,84 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minecraft Nexus Host</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101510;color:#f2f5f0;font-family:Arial,sans-serif}
+header{background:#18251a;padding:22px 16px;border-bottom:3px solid #55b94c}
+h1{margin:0;color:#75df60;font-size:25px}
+header p{color:#c1cfc0;margin-bottom:0}
+main{max-width:850px;margin:auto;padding:16px}
+.card{background:#1c261e;border:1px solid #354637;border-radius:12px;padding:18px;margin-bottom:16px}
+h2{font-size:18px;margin-top:0}
+.status{color:#ffcf68;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stat{background:#111a12;padding:14px;border-radius:8px}
+.number{font-size:23px;color:#8ee77b;font-weight:bold;margin-top:8px}
+button{background:#4caf50;color:#fff;border:0;border-radius:7px;padding:12px;font-weight:bold;cursor:pointer}
+button:active{opacity:.8}
+input{width:100%;padding:12px;background:#101510;color:white;border:1px solid #506451;border-radius:7px;margin:8px 0 12px}
+.muted{color:#b8c5b8;font-size:13px;line-height:1.5}
+footer{text-align:center;color:#91a091;padding:20px;font-size:12px}
+@media(max-width:420px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>⛏ Minecraft Nexus Host</h1>
+<p>Seu servidor. Sua comunidade. Seu Nexus.</p>
+</header>
+<main>
+<section class="card">
+<h2>Visão geral do servidor</h2>
+<p>Status: <span class="status" id="status">Não conectado</span></p>
+<div class="grid">
+<div class="stat">Jogadores online<div class="number">— / 20</div></div>
+<div class="stat">Versão<div class="number">PE 0.15.10</div></div>
+</div>
+<p class="muted">Os dados reais aparecerão quando uma hospedagem compatível for conectada.</p>
+</section>
+
+<section class="card">
+<h2>🌐 Conexão</h2>
+<label for="address">Endereço do servidor</label>
+<input id="address" placeholder="Ex.: jogar.exemplo.com">
+<label for="port">Porta</label>
+<input id="port" type="number" value="19132">
+<button onclick="copyAddress()">Copiar endereço</button>
+<p id="message" class="muted" aria-live="polite"></p>
+</section>
+
+<section class="card">
+<h2>🛠️ Gerenciamento</h2>
+<p class="muted">Estes controles ainda não estão conectados a um servidor real.</p>
+<button onclick="alert('Ainda falta configurar uma hospedagem e uma API segura.')">Configurar servidor</button>
+</section>
+
+<section class="card">
+<h2>📋 Sobre o projeto</h2>
+<p>Minecraft Nexus Host</p>
+<p class="muted">Painel experimental para gerenciamento de comunidade Minecraft Bedrock. A compatibilidade com PE 0.15.10 precisa ser confirmada na hospedagem escolhida.</p>
+</section>
+</main>
+<footer>Minecraft Nexus Host • Projeto comunitário não oficial</footer>
+<script>
+function copyAddress(){
+ const a=document.getElementById('address').value.trim();
+ const p=document.getElementById('port').value.trim();
+ const m=document.getElementById('message');
+ if(!a){m.textContent='Digite primeiro o endereço do servidor.';return}
+ const text=a+':'+p;
+ if(navigator.clipboard && window.isSecureContext){
+  navigator.clipboard.writeText(text).then(()=>m.textContent='Endereço copiado: '+text).catch(()=>m.textContent='Endereço: '+text);
+ }else{
+  m.textContent='Endereço para copiar: '+text;
+ }
+}
+</script>
+</body>
+</html>
